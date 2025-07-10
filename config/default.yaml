@@ -1,0 +1,60 @@
+# Quickscene Default Configuration
+# Video timestamp-retrieval system settings
+
+# Audio Speech Recognition settings
+asr:
+  mode: "whisper"  # Options: "whisper", "assemblyai"
+  whisper_model: "base"  # Options: "tiny", "base", "small", "medium", "large"
+  language: "en"  # Language code for transcription
+  device: "cpu"  # Force CPU usage as per requirements
+
+# Text Embedding settings  
+embedding:
+  model_name: "all-MiniLM-L6-v2"  # Primary model (384-dim)
+  # Alternative: "all-mpnet-base-v2" (768-dim, higher accuracy)
+  batch_size: 32
+  max_seq_length: 512
+  device: "cpu"
+
+# Chunking settings
+chunking:
+  duration_sec: 15  # Chunk duration in seconds (10-15s range)
+  overlap_sec: 0    # No overlap as per requirements
+  respect_word_boundaries: true
+  min_chunk_length: 10  # Minimum words per chunk
+
+# FAISS Index settings
+index:
+  type: "IndexFlatIP"  # Inner Product for cosine similarity
+  metric: "METRIC_INNER_PRODUCT"
+  nprobe: 10  # Number of clusters to search (if using IVF)
+
+# Query processing settings
+query:
+  max_results: 5  # Number of results to return
+  similarity_threshold: 0.3  # Minimum similarity score
+  response_timeout_sec: 1.0  # Maximum response time
+
+# File paths (relative to project root)
+paths:
+  videos: "./data/videos/"
+  transcripts: "./data/transcripts/"
+  chunks: "./data/chunks/"
+  embeddings: "./data/embeddings/"
+  index: "./data/index/"
+  index_file: "superbryne.index"
+  metadata_file: "metadata.json"
+
+# Performance settings
+performance:
+  max_concurrent_transcriptions: 2
+  embedding_batch_size: 32
+  index_build_batch_size: 1000
+
+# Logging settings
+logging:
+  level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {name}:{function}:{line} | {message}"
+  file: "./logs/quickscene.log"
+  rotation: "10 MB"
+  retention: "7 days"

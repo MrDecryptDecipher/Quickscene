@@ -1,0 +1,47 @@
+# Quickscene Production Configuration
+# As specified in PRD requirements
+
+# ASR (Automatic Speech Recognition) Configuration
+asr_mode: "whisper"  # Options: "whisper", "assemblyai"
+whisper_model: "tiny"  # Options: "tiny", "base", "small", "medium", "large"
+
+# Embedding Configuration
+embedding_model: "all-MiniLM-L6-v2"  # SentenceTransformer model
+embedding_dimension: 384  # Expected embedding dimension
+
+# Chunking Configuration
+chunk_duration_sec: 15  # Duration of each transcript chunk in seconds
+chunk_overlap_sec: 2    # Overlap between chunks to avoid cutting words
+
+# File Paths (as per PRD structure)
+video_path: "./data/videos/"
+transcript_path: "./data/transcripts/"
+chunks_path: "./data/chunks/"
+embedding_path: "./data/embeddings/"
+index_path: "./data/index/"
+
+# FAISS Index Configuration
+faiss_index_path: "./data/index/quickscene.index"
+metadata_path: "./data/index/metadata.json"
+index_type: "IndexFlatIP"  # Inner Product for cosine similarity
+
+# Performance Configuration
+max_workers: 4  # Number of parallel workers for processing
+batch_size: 32  # Batch size for embedding generation
+
+# Query Configuration
+default_top_k: 5  # Default number of results to return
+similarity_threshold: 0.3  # Minimum similarity score for results
+
+# Logging Configuration
+log_level: "INFO"  # Options: "DEBUG", "INFO", "WARNING", "ERROR"
+log_file: "./logs/quickscene.log"
+
+# Video Processing Configuration
+supported_formats: [".mp4", ".avi", ".mov", ".mkv", ".webm"]
+max_video_duration_hours: 5  # Maximum video duration to process
+
+# Production Settings
+enable_caching: true  # Cache embeddings and transcripts
+cache_ttl_hours: 24   # Time to live for cached data
+enable_monitoring: true  # Enable performance monitoring

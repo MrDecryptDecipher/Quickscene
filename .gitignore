@@ -1,0 +1,341 @@
+# Quickscene .gitignore - Professional 10/10 Code Quality
+# SuperBryn Technical Assessment
+
+# ===== PYTHON =====
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# ===== VIDEO FILES =====
+# Exclude all video files to keep repository clean
+videos/
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.wmv
+*.flv
+*.webm
+*.m4v
+*.3gp
+
+# ===== AUDIO FILES =====
+*.wav
+*.mp3
+*.flac
+*.aac
+*.ogg
+*.wma
+
+# ===== DATA FILES =====
+# Processed data and embeddings
+data/videos/
+data/transcripts/
+data/chunks/
+data/embeddings/
+data/index/
+embeddings/
+transcripts/
+chunks/
+index/
+
+# Large model files
+*.bin
+*.safetensors
+models/
+
+# ===== LOGS =====
+logs/
+*.log
+*.log.*
+
+# ===== TEMPORARY FILES =====
+tmp/
+temp/
+.tmp/
+.temp/
+
+# ===== IDE AND EDITOR =====
+# VSCode
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ===== SYSTEM FILES =====
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.tmp
+*.temp
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ===== QUICKSCENE SPECIFIC =====
+# Configuration files with sensitive data
+config/production.yaml
+config/secrets.yaml
+.secrets
+api_keys.txt
+
+# Conversation and PRD files (Sensitive Information)
+quicksceneconvo.txt
+quicksceneprd.txt
+
+# Frontend build directory
+quickscene-frontend/build/
+quickscene-frontend/node_modules/
+
+# Analytics and metrics
+analytics/
+metrics/
+performance_data/
+
+# Backup files
+*.backup
+*.bak
+backup/
+
+# Cache directories
+.cache/
+cache/
+
+# ===== DOCUMENTATION BUILD =====
+docs/_build/
+docs/build/
+
+# ===== TESTING =====
+.coverage
+htmlcov/
+.pytest_cache/
+test_results/
+
+# ===== DEPLOYMENT =====
+# Docker
+.dockerignore
+Dockerfile.prod
+
+# Kubernetes
+k8s/secrets/
+*.secret.yaml
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# ===== MONITORING =====
+# Prometheus
+prometheus_data/
+
+# Grafana
+grafana_data/
+
+# ===== SECURITY =====
+# SSL certificates
+*.pem
+*.key
+*.crt
+*.csr
+ssl/
+
+# API keys and tokens
+.env.production
+.env.staging
+secrets/
+tokens/
+
+# ===== PERFORMANCE =====
+# Profiling data
+*.prof
+profiling/
+
+# Benchmark results
+benchmark_results/
+
+# ===== MISC =====
+# Compressed files
+*.zip
+*.tar.gz
+*.rar
+*.7z
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Node.js (for any frontend tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===== KEEP THESE FILES =====
+# Important: DO NOT ignore these essential files
+!README.md
+!requirements.txt
+!.gitignore
+!LICENSE
+!setup.py
+!pyproject.toml
+!Dockerfile
+!docker-compose.yml
+!ecosystem.config.js
+!nginx.conf
+!deploy.sh

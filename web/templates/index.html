@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬 Quickscene - Lightning-Fast Video Search</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-video"></i>
+                <h1>Quickscene</h1>
+            </div>
+            <div class="tagline">
+                Lightning-fast video timestamp retrieval
+            </div>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <div class="search-box">
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Search for any moment in your videos... (e.g., 'artificial intelligence', 'blockchain')"
+                        autocomplete="off"
+                    >
+                    <button id="searchBtn" class="search-btn">
+                        <i class="fas fa-search"></i>
+                        Search
+                    </button>
+                </div>
+                
+                <div class="search-options">
+                    <label>
+                        <input type="number" id="topK" value="5" min="1" max="20">
+                        Results
+                    </label>
+                    <label>
+                        <input type="range" id="threshold" min="0" max="1" step="0.1" value="0.3">
+                        Similarity: <span id="thresholdValue">0.3</span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Status Section -->
+        <section class="status-section">
+            <div class="status-container">
+                <div class="status-item">
+                    <i class="fas fa-database"></i>
+                    <span id="videoCount">-</span> Videos
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-clock"></i>
+                    <span id="responseTime">-</span>ms
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-search"></i>
+                    <span id="searchType">-</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="results-section">
+            <div id="loadingSpinner" class="loading hidden">
+                <i class="fas fa-spinner fa-spin"></i>
+                Searching videos...
+            </div>
+            
+            <div id="resultsContainer" class="results-container hidden">
+                <div class="results-header">
+                    <h2>Search Results</h2>
+                    <div class="results-meta">
+                        <span id="resultsCount">0</span> results found in 
+                        <span id="queryTime">0</span>ms
+                    </div>
+                </div>
+                
+                <div id="resultsList" class="results-list">
+                    <!-- Results will be populated here -->
+                </div>
+            </div>
+            
+            <div id="noResults" class="no-results hidden">
+                <i class="fas fa-search"></i>
+                <h3>No results found</h3>
+                <p>Try adjusting your search terms or lowering the similarity threshold.</p>
+            </div>
+            
+            <div id="errorMessage" class="error-message hidden">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Search Error</h3>
+                <p id="errorText">An error occurred while searching.</p>
+            </div>
+        </section>
+
+        <!-- Analytics Section -->
+        <section class="analytics-section">
+            <div class="analytics-container">
+                <h2>System Analytics</h2>
+                
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <div class="analytics-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="analytics-content">
+                            <div class="analytics-value" id="totalQueries">-</div>
+                            <div class="analytics-label">Total Queries</div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <div class="analytics-icon">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <div class="analytics-content">
+                            <div class="analytics-value" id="avgResponseTime">-</div>
+                            <div class="analytics-label">Avg Response (ms)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <div class="analytics-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="analytics-content">
+                            <div class="analytics-value" id="popularQuery">-</div>
+                            <div class="analytics-label">Popular Query</div>
+                        </div>
+                    </div>
+                    
+                    <div class="analytics-card">
+                        <div class="analytics-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="analytics-content">
+                            <div class="analytics-value" id="successRate">-</div>
+                            <div class="analytics-label">Success Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Quickscene</h3>
+                    <p>Lightning-fast video timestamp retrieval system</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Performance</h3>
+                    <p>Sub-700ms query response time</p>
+                    <p>Cross-video search capability</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Technology</h3>
+                    <p>OpenAI Whisper • SentenceTransformers • FAISS</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Quickscene. Built with ❤️ for lightning-fast video search.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Batch Query Modal -->
+    <div id="batchModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Batch Query</h2>
+                <button class="modal-close" id="closeBatchModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea 
+                    id="batchQueries" 
+                    placeholder="Enter multiple queries, one per line:&#10;artificial intelligence&#10;blockchain technology&#10;quantum computing"
+                    rows="8"
+                ></textarea>
+                <div class="modal-options">
+                    <label>
+                        Results per query:
+                        <input type="number" id="batchTopK" value="3" min="1" max="10">
+                    </label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="runBatchQuery" class="btn btn-primary">
+                    <i class="fas fa-play"></i>
+                    Run Batch Query
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <button id="batchQueryBtn" class="quick-action-btn" title="Batch Query">
+            <i class="fas fa-list"></i>
+        </button>
+        <button id="analyticsBtn" class="quick-action-btn" title="Toggle Analytics">
+            <i class="fas fa-chart-bar"></i>
+        </button>
+        <button id="helpBtn" class="quick-action-btn" title="Help">
+            <i class="fas fa-question"></i>
+        </button>
+    </div>
+
+    <!-- Help Modal -->
+    <div id="helpModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>How to Use Quickscene</h2>
+                <button class="modal-close" id="closeHelpModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="help-section">
+                    <h3><i class="fas fa-search"></i> Search Types</h3>
+                    <ul>
+                        <li><strong>Keyword Search:</strong> Single words (e.g., "AI", "blockchain")</li>
+                        <li><strong>Semantic Search:</strong> Natural language phrases (e.g., "artificial intelligence concepts")</li>
+                    </ul>
+                </div>
+                
+                <div class="help-section">
+                    <h3><i class="fas fa-cog"></i> Options</h3>
+                    <ul>
+                        <li><strong>Results:</strong> Number of results to return (1-20)</li>
+                        <li><strong>Similarity:</strong> Minimum similarity threshold (0.0-1.0)</li>
+                    </ul>
+                </div>
+                
+                <div class="help-section">
+                    <h3><i class="fas fa-lightbulb"></i> Tips</h3>
+                    <ul>
+                        <li>Use specific terms for better results</li>
+                        <li>Lower similarity threshold for broader matches</li>
+                        <li>Try both keyword and phrase searches</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
