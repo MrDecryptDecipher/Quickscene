@@ -1,6 +1,6 @@
 # 🎬 Quickscene: Lightning-Fast Video Search System
 
-> **🎯 SuperBryn Technical Assessment - Built by Sandeep Kumar Sahoo**
+> **🎯 - Built by Sandeep Kumar Sahoo**
 
 [![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org)
 [![React](https://img.shields.io/badge/React-18+-61DAFB.svg)](https://reactjs.org)
